@@ -1,0 +1,17 @@
+#!/bin/bash
+
+# Function to decode HTML entities
+decode_html_entities() {
+  sed -E '
+    s/&lt;/</g;       # Replace &lt; with <
+    s/&gt;/>/g;       # Replace &gt; with >
+    s/&amp;/\&/g;     # Replace &amp; with &
+    s/&quot;/"/g;     # Replace &quot; with "
+  '
+}
+
+# Main processing
+sed -E '
+  s/<[^>]*>//g;            # Remove content within angled brackets
+  s/^:.*?[;}]*//g;         # Remove CSS-like content starting with ":"
+' | decode_html_entities
