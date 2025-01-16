@@ -10,8 +10,24 @@ decode_html_entities() {
   '
 }
 
-# Main processing
-sed -E '
-  s/<[^>]*>//g;            # Remove content within angled brackets
-  s/^:.*?[;}]*//g;         # Remove CSS-like content starting with ":"
-' | decode_html_entities
+# Function to process the input (file or stdin)
+process_input() {
+  sed -E '
+    s/<[^>]*>//g;            # Remove content within angled brackets
+    s/^:.*?[;}]*//g;         # Remove CSS-like content starting with ":"
+  ' | decode_html_entities
+}
+
+# Check if a file is provided as an argument
+if [[ $# -gt 0 ]]; then
+  # File is provided, check if it exists and is readable
+  if [[ -r "$1" ]]; then
+    cat "$1" | process_input
+  else
+    echo "Error: File '$1' does not exist or is not readable." >&2
+    exit 1
+  fi
+else
+  # No file provided, read from stdin
+  process_input
+fi
