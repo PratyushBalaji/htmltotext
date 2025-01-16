@@ -7,7 +7,7 @@ This is a simple Bash script to convert HTML content into plain text by removing
 ## Features
 - Removes all HTML tags and inline CSS content.
 - Decodes common HTML entities (e.g., `&lt;`, `&gt;`, `&amp;`).
-- Supports input redirection, making it easy to process files directly from the command line.
+- Supports I/O redirection, making it easy to process files directly from the command line.
 - Can be added to your `PATH` for terminal-wide usage.
 
 ---
@@ -50,12 +50,18 @@ If you are on a shared system or don’t have root access, you can add the direc
 ## Usage
 
 ### Basic Usage
-To process an HTML file and output plain text to the terminal :
+#### HTML files can be process as Command Line Arguments, through Piping, or through Input Redirection
+To process an HTML file and output text to the terminal (As a Command Line Argument) :
+```bash
+htmltotext input.html
+```
+
+To process an HTML file and output plain text to the terminal (Using Pipes) :
 ```bash
 cat input.html | htmltotext
 ```
 
-To process an HTML file and output plain text to a file :
+To process an HTML file and output plain text to a file (Using Input/Output Redirection) :
 ```bash
 htmltotext < input.html > output.txt
 ```
@@ -63,7 +69,7 @@ htmltotext < input.html > output.txt
 ### Using Pipes
 You can use it with other commands via pipes :
 ```bash
-curl http://example.com | htmltotext > output.txt
+curl http://example.com | grep "h(1|2|3|4|5)" | htmltotext > output.txt
 ```
 
 ### Example
