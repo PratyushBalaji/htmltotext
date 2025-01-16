@@ -69,7 +69,7 @@ htmltotext < input.html > output.txt
 ### Using Pipes
 You can use it with other commands via pipes :
 ```bash
-curl http://example.com | grep "h(1|2|3|4|5)" | htmltotext > output.txt
+curl http://example.com | egrep "h(1|2|3|4|5)" | htmltotext > output.txt
 ```
 
 ### Example
